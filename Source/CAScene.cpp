@@ -2,19 +2,19 @@
 #include "ExampleScene.h"
 #include "Random.h"
 
-color_t white = { 255, 255, 255, 255 };
-color_t black = { 0, 0, 0, 255 };
+const color_t white = { 255, 255, 255, 255 };
+const color_t black = { 0, 0, 0, 255 };
 
 bool CAScene::Initialize()
 {
 	m_renderer.Initialize();
-	m_renderer.CreateWindow("Example", 800, 600);
+	m_renderer.CreateWindow("CA", 800, 600);
 
 	m_input.Initialize();
 	m_input.Update();
 
 	m_framebuffer = std::make_unique<Framebuffer>(m_renderer, m_renderer.m_width / 2, m_renderer.m_height / 2);
-	m_cells = std::make_unique<Cells<bool>>(m_renderer.m_width / 2, m_renderer.m_height / 2);
+	m_cells = std::make_unique<Cells<uint8_t>>(m_renderer.m_width / 2, m_renderer.m_height / 2);
 
 
 	return true;
@@ -22,21 +22,7 @@ bool CAScene::Initialize()
 
 void CAScene::Update()
 {
-	m_time.Tick();
-	m_input.Update();
-
-	SDL_Event event;
-	while (SDL_PollEvent(&event))
-	{
-		if (event.type == SDL_QUIT)
-		{
-			m_quit = true;
-		}
-		if (event.type == SDL_KEYDOWN && event.key.keysym.sym == SDLK_ESCAPE)
-		{
-			m_quit = true;
-		}
-	}
+	Scene::Update();
 
 	m_framebuffer->Clear(color_t{ 0, 0, 0, 255 }); //had to move the clearing of the framebuffer to before the writing of the cells
 

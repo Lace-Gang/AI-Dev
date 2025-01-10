@@ -16,5 +16,5 @@ public:
 
 public:
 	std::unique_ptr<Framebuffer> m_framebuffer;
-	std::unique_ptr<Cells<bool>> m_cells; //the brakets to tell what type T is in the Cells class
+	std::unique_ptr<Cells<uint8_t>> m_cells; //the brakets to tell what type T is in the Cells class
 };

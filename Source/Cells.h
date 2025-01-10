@@ -11,7 +11,7 @@ public:
 		m_data.resize(width * height); //alocating / making the array the correct size
 	}
 
-	const T& Read(int x, int y) const { return m_data[x + (y * m_width)]; } //similar method of checking the array as in setting pixels in the framebuffer in computer graphics
+	T Read(int x, int y) const { return m_data[x + (y * m_width)]; } //similar method of checking the array as in setting pixels in the framebuffer in computer graphics
 	void Write(int x, int y, const T& v) { m_data[x + (y * m_width)] = v; }
 
 public:
